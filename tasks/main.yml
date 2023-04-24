@@ -1,0 +1,33 @@
+---
+
+- include_tasks: 
+    file: "{{ item }}"
+    apply:
+      tags: repo
+  with_first_found:
+    - "setup_repo_{{ ansible_os_family }}.yml"
+    - "setup_repo_{{ ansible_distribution }}.yml"
+  tags: repo
+
+- include_tasks: 
+    file: "{{ item }}"
+    apply:
+      tags: install
+  with_first_found:
+    - "install_docker_{{ ansible_distribution }}.yml"
+    - install_docker.yml
+  tags: install
+
+- include_tasks: 
+    file: setup_user.yml
+    apply:
+      tags: user
+  tags: user
+  when: additional_docker_user is defined
+
+- include_tasks: 
+    file: setup_proxy.yml
+    apply:
+      tags: proxy
+  tags: proxy
+  when: http_proxy is defined

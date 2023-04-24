@@ -1,0 +1,26 @@
+---
+- name: Install docker
+  ansible.builtin.package:  
+    name: 
+      - docker
+    state: present 
+    update_cache: yes
+
+- name: Get stats of a file
+  ansible.builtin.stat:
+    path: /usr/local/lib/docker/cli-plugins
+  register: cli_plugin_dir
+
+- block:
+    - name: Create /usr/local/lib/docker/cli-plugins directory
+      ansible.builtin.file:
+        path: /usr/local/lib/docker/cli-plugins
+        state: directory
+        mode: '0755'
+
+    - name: Download docker-compose-plugin
+      ansible.builtin.get_url:
+        url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_plugin_version }}/docker-compose-linux-{{ ansible_architecture }}"
+        dest: /usr/local/lib/docker/cli-plugins/docker-compose
+        mode: '0777'
+  when: not cli_plugin_dir.stat.exists

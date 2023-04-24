@@ -1,0 +1,21 @@
+---
+
+- name: Install docker-ce
+  ansible.builtin.package:  
+    name: 
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present 
+    update_cache: yes
+
+- name: Ensure docker python module and jsondiff are installed
+  # https://docs.ansible.com/ansible/latest/modules/pip_module.html
+  ansible.builtin.pip:
+    name: 
+      - docker
+      # jsondiff and pyyaml are needed by the docker_stack module
+      - jsondiff
+      - pyyaml

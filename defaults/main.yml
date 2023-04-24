@@ -1,0 +1,10 @@
+---
+repo_manager_package_name:
+  fedora: dnf-plugins-core
+  rhel: yum-utils
+  centos: yum-utils
+repo_manager_cmd:
+  fedora: dnf config-manager
+  centos: yum-config-manager
+  rhel: yum-config-manager
+docker_compose_plugin_version: 2.17.2

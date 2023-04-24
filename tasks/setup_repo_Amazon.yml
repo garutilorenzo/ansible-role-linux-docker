@@ -1,0 +1,5 @@
+---
+
+- name: Install required system packages
+  ansible.builtin.debug: 
+    msg: "Setup not needed on Amazon AMI"

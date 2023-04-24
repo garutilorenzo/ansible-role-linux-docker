@@ -1,0 +1,28 @@
+---
+
+- name: Install required system packages
+  ansible.builtin.package:  
+    name: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - python3-setuptools
+      - make
+    state: present 
+    update_cache: yes
+
+- name: Add Docker GPG apt Key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    state: present
+
+- ansible.builtin.shell: . /etc/os-release && echo "$VERSION_CODENAME"
+  register: release_codename
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ release_codename.stdout }} stable
+    state: present
+  ignore_errors: "{{ ansible_check_mode }}"
