@@ -6,7 +6,7 @@
     state: present 
     update_cache: yes
 
-- name: Get stats of a file
+- name: Check if /usr/local/lib/docker/cli-plugins exists
   ansible.builtin.stat:
     path: /usr/local/lib/docker/cli-plugins
   register: cli_plugin_dir

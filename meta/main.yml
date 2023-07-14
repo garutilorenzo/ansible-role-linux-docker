@@ -11,9 +11,9 @@ galaxy_info:
       versions:
         - jammy
         - focal
-    - name: Amazon Linux 2
+    - name: Amazon Linux
       versions:
-        - "all"
+        - "2"
   galaxy_tags:
     - docker
     - infrastructure

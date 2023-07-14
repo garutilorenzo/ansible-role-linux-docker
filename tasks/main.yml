@@ -5,8 +5,8 @@
     apply:
       tags: repo
   with_first_found:
-    - "setup_repo_{{ ansible_os_family }}.yml"
     - "setup_repo_{{ ansible_distribution }}.yml"
+    - "setup_repo_{{ ansible_os_family }}.yml"
   tags: repo
 
 - include_tasks: 
