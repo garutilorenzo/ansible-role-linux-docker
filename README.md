@@ -21,7 +21,6 @@ This role accept this variables:
 
 | Var   | Required |  Default | Desc |
 | ------- | ------- | ----------- |  ----------- |
-
 | `additional_docker_user`       | `no`       | ``       | Additional docker user to be added on docker group  |
 | `http_proxy`       | `no`       | ``       | Porxy used by the docker daemon to reach internet (HTTP)  |
 | `https_proxy`       | `no`       | ``       | Porxy used by the docker daemon to reach internet (HTTPS)  |
